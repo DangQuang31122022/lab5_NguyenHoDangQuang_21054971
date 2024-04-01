@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="title">
+        <h2>Order Product</h2>
+    </div>
+    <div>
+        <div th:switch="${status}" style="width: 100%">
+            <h3 th:case="S" style="width: 100%; text-align: center; color: green">Order Success</h3>
+            <h3 th:case="F" style="width: 100%; text-align: center; color: red">Order Failed! Not enough quantity to sell</h3>
+            <h3 th:case="*"></h3>
+        </div>
+        <form action="order-product/order" method="post">
+            <label>Name:</label>
+            <input type="text" name="name" required class="margin"></br>
+            <label>Address:</label>
+            <input type="text" name="address" required class="margin"></br>
+            <label>Phone:</label>
+            <input type="number" name="phone" required class="margin"></br>
+            <label>Email:</label>
+            <input type="email" name="email" required class="margin"></br>
+            <label>Product Name:</label>
+            <div th:each="product : ${products}">
+                <p th:text="${product.name}"></p>
+            </div>
+            <select name="product" class="margin">
+                <div th:each="product : ${products}">
+                    <option th:text="${product.name}" th:value="${product.id}"></option>
+                </div>
+            </select></br>
+            <label>Quantity:</label>
+            <input type="number" name="quantity" class="margin" required>
+            <button type="submit">Order</button>
+        </form>
+    </div>
+</body>
+</html>
